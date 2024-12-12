@@ -78,7 +78,6 @@ for i in range(n): # 對於每一行
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
 </p>
-<!-- 啟動 Brython -->
 <p>
 <script>
 window.onload=function(){
@@ -87,33 +86,127 @@ brython({debug:1, pythonpath:['/static/','./../downloads/py/']});
 </script>
 </p>
 <div id="brython_div1"></div>
-<p>
-<script type="text/python">
+<script type="text/python3">
 from browser import html
 from browser import document as doc
-
-# 利用 html 建立 canvas 超文件物件
-canvas = html.CANVAS(width=400, height=400)
+ 
+# 創建畫布元素
+canvas = html.CANVAS(width=500, height=500)
 brython_div = doc["brython_div1"]
 brython_div <= canvas
-
+ 
+# 定義圓心中心座標和半徑
+x1, y1 = 200, 200  # 第一個圓的中心座標
+x2, y2 = 300, 300  # 第二個圓的中心座標
+radius = 141.4  # 圓的半徑
+ 
 ctx = canvas.getContext("2d")
-ctx.lineWidth = 1
+ 
+# 繪製第一個圓 (黑色邊框)
+ctx.beginPath()
+ctx.arc(x1, y1, radius, 0, 2 * 3.14159)
+ctx.fillStyle = "orange"  # 圓的填充顏色
+ctx.fill()
+ctx.lineWidth = 2
+ctx.strokeStyle = "darkred"  # 圓的邊框顏色
+ctx.stroke()
+ 
+# 繪製第二個圓 (黑色邊框)
+ctx.beginPath()
+ctx.arc(x2, y2, radius, 0, 2 * 3.14159)
+ctx.fillStyle = "mediumaquamarine"  # 圓的填充顏色
+ctx.fill()
+ctx.lineWidth = 2
+ctx.strokeStyle = "darkgreen"  # 圓的邊框顏色
+ctx.stroke()
+ 
+# 填充第一個和第二個圓的交集區域
+ctx.save()
+ctx.beginPath()
+ctx.arc(x1, y1, radius, 0, 2 * 3.14159)
+ctx.clip()  # 剪裁到第一個圓
+ctx.beginPath()
+ctx.arc(x2, y2, radius, 0, 2 * 3.14159)
+ctx.fillStyle = "deepskyblue"  # 交集區域填充顏色
+ctx.fill()
+ctx.restore()
 
-# 繪製兩個矩形
-ctx.strokeStyle = 'red'  # 設定矩形顏色為紅色
-ctx.beginPath() 
-ctx.rect(10, 10, 200, 200)
-ctx.rect(110, 110, 200, 200)
+# 1. 繪製第一個正方形 (紅色邊框，紫色填充)
+ctx.beginPath()
+ctx.rect(100, 100, 200, 200)
+ctx.fillStyle = "mediumpurple"  # 第一個正方形的填充顏色
+ctx.fill()
+ctx.lineWidth = 2
+ctx.strokeStyle = "crimson"  # 第一個正方形的邊框顏色
 ctx.stroke()
-# 繪製對角線，顏色設定為藍色
-ctx.strokeStyle = 'blue'  # 設定對角線顏色為藍色
-ctx.beginPath() 
-ctx.moveTo(10, 10)
-ctx.lineTo(210, 210)
+
+# 2. 繪製第二個正方形 (紅色邊框，粉色填充)
+ctx.beginPath()
+ctx.rect(200, 200, 200, 200)
+ctx.fillStyle = "lightpink"  # 第二個正方形的填充顏色
+ctx.fill()
+ctx.strokeStyle = "firebrick"  # 第二個正方形的邊框顏色
 ctx.stroke()
-</script>
-</p><h1>HW 2</h1>
+
+# 3. 繪製斜線 (藍色)
+ctx.beginPath()
+ctx.moveTo(100, 100)
+ctx.lineTo(300, 300)
+ctx.strokeStyle = "royalblue"
+ctx.lineWidth = 2
+ctx.stroke()
+
+# 4. 填充由方框和對角線劃分的區域
+
+# 繪製第一個方框內部的區域（藍色區域）
+ctx.fillStyle = "lightblue"
+ctx.beginPath()
+ctx.rect(100, 100, 200, 200)  # 第一個正方形
+ctx.fill()
+
+# 繪製第二個方框內部的區域（黃色區域）
+ctx.fillStyle = "yellow"
+ctx.beginPath()
+ctx.rect(200, 200, 200, 200)  # 第二個正方形
+ctx.fill()
+
+# 填充斜線劃分的區域
+ctx.fillStyle = "green"
+ctx.beginPath()
+ctx.moveTo(100, 100)  # 起點
+ctx.lineTo(300, 300)  # 斜線終點
+ctx.lineTo(300, 100)  # 矩形的右上角
+ctx.closePath()
+ctx.fill()
+
+# 確保保留所有邊界
+ctx.strokeStyle = "crimson"  # 保留第一個方框邊框
+ctx.beginPath()
+ctx.rect(100, 100, 200, 200)
+ctx.stroke()
+
+ctx.strokeStyle = "firebrick"  # 保留第二個方框邊框
+ctx.beginPath()
+ctx.rect(200, 200, 200, 200)
+ctx.stroke()
+
+ctx.strokeStyle = "royalblue"  # 保留藍色斜線
+ctx.beginPath()
+ctx.moveTo(100, 100)
+ctx.lineTo(300, 300)
+ctx.stroke()
+
+# 保留圓形邊框
+ctx.strokeStyle = "darkred"  # 保留第一個圓邊框
+ctx.beginPath()
+ctx.arc(x1, y1, radius, 0, 2 * 3.14159)
+ctx.stroke()
+
+ctx.strokeStyle = "darkgreen"  # 保留第二個圓邊框
+ctx.beginPath()
+ctx.arc(x2, y2, radius, 0, 2 * 3.14159)
+ctx.stroke()
+</script><h1>HW 2</h1>
 <h4>主題: Python 的數列、判斷式與重複迴圈 (20%)<span style="background-color: #ffff99;"><br/></span></h4>
 <p style="padding-left: 30px;">Python 課程教材: <a href="https://www.learnpythonwithjupyter.com/">https://www.learnpythonwithjupyter.com/</a> - PART 2 and Part 3</p>
 <hr/>
@@ -156,12 +249,12 @@ ctx.stroke()
 <h1>Brython</h1>
 <p>從 1 累加到 100:</p>
 <p><button id="add1to100">1 add to 100</button></p>
-<!-- 導入 brython 程式庫 -->
+<p><!-- 導入 brython 程式庫 --></p>
 <p>
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
 </p>
-<!-- 啟動 Brython -->
+<p><!-- 啟動 Brython --></p>
 <p>
 <script>
 window.onload=function(){
@@ -263,7 +356,7 @@ doc["add1to100"].bind('click', add)
 </script>
 </p>
 <p><!-- add 1 to 100 結束--></p>
-<!-- editor1 開始 -->
+<p><!-- editor1 開始 --></p>
 <p><!-- 用來顯示程式碼的 editor 區域 --></p>
 <div id="kw_editor1" style="width: 600px; height: 300px;"></div>
 <p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
@@ -279,7 +372,9 @@ doc["add1to100"].bind('click', add)
 <div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console1"></textarea></div>
 <p><!-- Brython 程式執行的結果, 都以 brython_div1 作為切入位置 --></p>
 <div id="brython_div1"></div>
-<!-- editor1 結束 --><hr/><!-- ########################################## -->
+<p><!-- editor1 結束 --></p>
+<hr/>
+<p><!-- ########################################## --></p>
 <p>從 1 累加到 100 part2:</p>
 <p><button id="add1to100part2">1 add to 100</button><button id="cango_three_gears">cango_three_gears</button><button id="bsnake">BSnake</button><button id="aitetris">AI Tetris</button><button id="threejsblock">Rotating Block</button></p>
 <p><!-- 請注意, 這裡使用 Javascript 將 localStorage["kw_py_src2"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
@@ -382,7 +477,7 @@ doc["threejsblock"].bind("click", threejsblock.do)
 </script>
 </p>
 <p><!-- add 1 to 100 part2 結束--></p>
-<!-- editor2 開始 -->
+<p><!-- editor2 開始 --></p>
 <p><!-- 用來顯示程式碼的 editor 區域 --></p>
 <div id="kw_editor2" style="width: 600px; height: 300px;"></div>
 <p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
@@ -398,7 +493,8 @@ doc["threejsblock"].bind("click", threejsblock.do)
 <div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console2"></textarea></div>
 <p><!-- Brython 程式執行的結果, 都以 brython_div1 作為切入位置 --></p>
 <div id="brython_div2"></div>
-<!-- editor2 結束 --><hr/>
+<p><!-- editor2 結束 --></p>
+<hr/>
 <p>
 <script src="https://unpkg.com/three@0.144.0/build/three.js" type="text/javascript"></script>
 </p>
