@@ -52,7 +52,7 @@
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/RIk9yLTClGw" width="560"></iframe></p>
 <p>題目二</p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/j4USvG4NFBk" width="560"></iframe></p>
-<h3>w12_hw</h3>
+<h3>w12</h3>
 <p></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">n = 5 # 總共的行數
 space ="_"
@@ -72,7 +72,8 @@ for i in range(n): # 對於每一行
     print("目前的數字為 " +str(i))</pre>
 <p><br/><br/></p>
 <p><br/><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/VvVZI1w1-mg" width="560"></iframe></p>
-<h3>w13_hw</h3>
+<h3>w12_hw</h3>
+<p></p><h3>w13_hw</h3>
 <!-- 導入 brython 程式庫 -->
 <p>
 <script src="/static/brython.js"></script>
@@ -247,6 +248,19 @@ print(result)  # 輸出結果
 # 測試函式
 result = add_avoid_8(1, 100)  # 計算從 1 到 100 的數字總和，避開包含 "8" 的數字
 print(result)  # 輸出結果
+</pre>
+<p><a href="https://mdecp2024.github.io/hw-41323127/content/Brython.html?src=https://gist.githubusercontent.com/41323127/0d76644b9a05b0cbc21990987882e6c4/raw/918285bb1ed4a86f0432c5c3d24a517eefb52a69/wh_w15%25E4%25BA%2594.py">add_avoid_3,8</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def add_avoid_3_8(start, end):
+    total = 0
+    for num in range(start, end + 1):
+        # 檢查數字是否包含 '3' 或 '8'
+        if '3' not in str(num) and '8' not in str(num):
+            total += num
+    return total
+
+# 計算從 1 到 100 的結果
+result = add_avoid_3_8(1, 100)
+print(result)
 </pre>
 <p></p><h1>HW 2</h1>
 <h4>主題: Python 的數列、判斷式與重複迴圈 (20%)<span style="background-color: #ffff99;"><br/></span></h4>
