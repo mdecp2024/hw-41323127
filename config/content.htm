@@ -586,70 +586,54 @@ ctx.fill()
 <p>透過 Jupyterlab 協同網頁, 輪流指定各組編寫 HW 3 相關的程式練習, 以及網頁內容 (localhost 與 Codespaces 環境)編輯.</p>
 <h3>w16_exam2</h3>
 <p><a href="https://mdecp2024.github.io/hw-41323127/content/Brython.html?src=https://gist.githubusercontent.com/41323127/7941d72068ad0527dd3830b1384a87f7/raw/0fa02b3c133a0aef1b6ed18a8363ab401b5c619e/w16_exam2.py">程式</a></p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import document, html
-import math
-  
-# 初始化 HTML，確保 canvas 元素存在
-def setup_canvas():
-    if not document.querySelector("#my_canvas"):
-        canvas = html.CANVAS(id="my_canvas", width=550, height=550)
-        document &lt;= canvas
-  
-setup_canvas()
- 
-# Set up canvas
-canvas = document["my_canvas"]
-ctx = canvas.getContext("2d")  #由2D來進行繪圖
- 
-# Set origin (31, 24)
-origin_x, origin_y = 31, 24  #設定原點座標為(31,24)
- 
-# Label origin(標記原點)  
-ctx.font = "12px Arial"  #字體大小:12  字型:Arial
-ctx.fillStyle = "red"  # 字體顏色改為紅色
-ctx.fillText("(31, 24)", origin_x + 5, origin_y - -15)  # ctx.fillText用以描繪文字
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import matplotlib.pyplot as plt
+import numpy as np
 
-ctx.beginPath()  #啟用一個新的路徑
-ctx.moveTo(origin_x, origin_y)  #從原點(31,24)
-ctx.lineTo(200, origin_y)  
-ctx.moveTo(300, origin_y)  
-ctx.lineTo(500, origin_y)  
-ctx.moveTo(150, 100)  
-ctx.lineTo(400, 100) 
-ctx.moveTo(150, 300)  
-ctx.lineTo(400, 300) 
-ctx.moveTo(origin_x, 500)  #從原點(31,24)
-ctx.lineTo(200, 500)  
-ctx.moveTo(300, 500)  
-ctx.lineTo(500, 500) 
-ctx.moveTo(200, 400)  
-ctx.lineTo(300, 400)
-ctx.moveTo(origin_x, 200)  
-ctx.lineTo(200, 200)
-ctx.strokeStyle = "blue"
-ctx.lineWidth = 2
-ctx.stroke() 
+# 設定學號最後四碼為 3127，即左上方座標 (31, 27)
+x_offset = 31
+y_offset = 27
 
-ctx.beginPath()  #啟用一個新的路徑
-ctx.moveTo(origin_x, origin_y)  
-ctx.lineTo(origin_x, 500)  
-ctx.moveTo(500, origin_y)  
-ctx.lineTo(500, 500) 
-ctx.moveTo(200, 100)  
-ctx.lineTo(200, 200) 
-ctx.moveTo(400, 100)  
-ctx.lineTo(400, 200) 
-ctx.moveTo(300, 200)  
-ctx.lineTo(300, 300) 
-ctx.moveTo(400, 300)  
-ctx.lineTo(400, 500) 
-ctx.moveTo(200, 400)  
-ctx.lineTo(200, 500) 
-ctx.moveTo(150, 300)  
-ctx.lineTo(150, 400)
-ctx.strokeStyle = "blue"
-ctx.lineWidth = 2
-ctx.stroke() </pre>
+# 迷宮的尺寸與設置
+maze_width = 20
+maze_height = 20
+
+# 創建一個畫布，背景為白色
+fig, ax = plt.subplots(figsize=(10, 10))
+
+# 定義迷宮的牆壁 (黑色像素) 和路徑
+maze = np.zeros((maze_height, maze_width))
+
+# 設定一些牆壁 (假設這是一個簡單的迷宮設計)
+maze[1:18, 5] = 1
+maze[1:18, 10] = 1
+maze[1:4, 1:10] = 1
+maze[12:18, 10:19] = 1
+
+# 畫出迷宮的牆壁 (黑色像素)
+for y in range(maze_height):
+    for x in range(maze_width):
+        if maze[y, x] == 1:
+            ax.add_patch(plt.Rectangle((x, maze_height - y - 1), 1, 1, color='black'))
+
+# 標示學號最後四碼作為左上角座標 (31, 27)
+ax.text(x_offset - 1, maze_height - y_offset, f'({x_offset}, {y_offset})', color='red', fontsize=12)
+
+# 模擬一條從入口到出口的路徑 (紅色連續線段)
+path_x = [2, 3, 3, 4, 5, 6, 6, 7, 8, 9, 9, 10, 11, 11, 12, 13, 14, 15, 16, 17]
+path_y = [0, 1, 2, 3, 3, 4, 5, 5, 6, 6, 7, 8, 8, 9, 10, 11, 12, 13, 14, 15]
+ax.plot(path_x, [maze_height - y - 1 for y in path_y], color='red', lw=2)
+
+# 設定畫布範圍與座標軸
+ax.set_xlim(0, maze_width)
+ax.set_ylim(0, maze_height)
+ax.set_aspect('equal')
+
+# 去除座標軸
+ax.axis('off')
+
+# 顯示結果
+plt.show()
+</pre>
 <p></p><h1>HW 4</h1>
 <h4>主題: 利用 Python 控制機電模擬系統 (20%)</h4>
 <p style="padding-left: 30px;">利用 <a href="https://solvespace.com/">https://solvespace.com/</a> 建立機械系統零組件</p>
@@ -662,7 +646,8 @@ ctx.stroke() </pre>
 <h2>HW 4 Exam</h2>
 <p>每六人為一組進行協同程式練習</p>
 <p>透過 Jupyterlab 協同網頁, 輪流指定各組編寫 HW 4 相關的程式練習, 以及網頁內容 (localhost 與 Codespaces 環境)編輯.</p>
-<h1>Final Report</h1>
+<h3>w16_exam3</h3>
+<p>程式</p><h1>Final Report</h1>
 <p>期末口頭與書面專題報告 (20%)</p>
 <p>期末口頭專題報告影片:</p>
 <p style="padding-left: 30px;">......</p>
