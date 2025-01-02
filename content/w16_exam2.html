@@ -130,7 +130,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='First.html'>First</a><li><a href='Attendance.html'>Attendance</a><li class='has-children'><a href='HW 1.html'>HW 1</a><ul class='dropdown'><li class='has-children'><a href='HW 1 Exam.html'>HW 1 Exam</a><ul class='dropdown'><li><a href='w7.html'>w7</a><li><a href='w10.html'>w10</a><li><a href='w11_hw.html'>w11_hw</a><li><a href='w12.html'>w12</a><li><a href='w12_hw.html'>w12_hw</a><li><a href='w13.html'>w13</a><li><a href='w15.html'>w15</a></li></li></ul></ul><li class='has-children'><a href='HW 2.html'>HW 2</a><ul class='dropdown'><li class='has-children'><a href='HW 2 Exam.html'>HW 2 Exam</a><ul class='dropdown'><li><a href='w16_exam1.html'>w16_exam1</a><li><a href='w16_exam2.html'>w16_exam2</a></li></li></ul></ul><li class='has-children'><a href='HW 3.html'>HW 3</a><ul class='dropdown'><li><a href='HW 3 Exam.html'>HW 3 Exam</a></li></ul><li class='has-children'><a href='HW 4.html'>HW 4</a><ul class='dropdown'><li><a href='HW 4 Exam.html'>HW 4 Exam</a></li></ul><li><a href='Final Report.html'>Final Report</a><li><a href='Brython.html'>Brython</a></li>
+                     <li><a href='First.html'>First</a><li><a href='Attendance.html'>Attendance</a><li class='has-children'><a href='HW 1.html'>HW 1</a><ul class='dropdown'><li class='has-children'><a href='HW 1 Exam.html'>HW 1 Exam</a><ul class='dropdown'><li><a href='w7.html'>w7</a><li><a href='w10.html'>w10</a><li><a href='w11_hw.html'>w11_hw</a><li><a href='w12.html'>w12</a><li><a href='w12_hw.html'>w12_hw</a><li><a href='w13.html'>w13</a><li><a href='w15.html'>w15</a></li></li></ul></ul><li class='has-children'><a href='HW 2.html'>HW 2</a><ul class='dropdown'><li class='has-children'><a href='HW 2 Exam.html'>HW 2 Exam</a><ul class='dropdown'><li><a href='w16_exam1.html'>w16_exam1</a></li></li></ul></ul><li class='has-children'><a href='HW 3.html'>HW 3</a><ul class='dropdown'><li class='has-children'><a href='HW 3 Exam.html'>HW 3 Exam</a><ul class='dropdown'><li><a href='w16_exam2.html'>w16_exam2</a></li></li></ul></ul><li class='has-children'><a href='HW 4.html'>HW 4</a><ul class='dropdown'><li><a href='HW 4 Exam.html'>HW 4 Exam</a></li></ul><li><a href='Final Report.html'>Final Report</a><li><a href='Brython.html'>Brython</a></li>
                       </ul>
                 </nav>
               </div>
@@ -141,8 +141,73 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w16_exam1 << <a href='w16_exam1.html'>Previous</a> <a href='HW 3.html'>Next</a> >> HW 3<br /><h1>w16_exam2</h1>
-<br />w16_exam1 << <a href='w16_exam1.html'>Previous</a> <a href='HW 3.html'>Next</a> >> HW 3</div>
+    <div id="tipue_search_content">HW 3 Exam << <a href='HW 3 Exam.html'>Previous</a> <a href='HW 4.html'>Next</a> >> HW 4<br /><h1>w16_exam2</h1>
+<p><a href="https://mdecp2024.github.io/hw-41323127/content/Brython.html?src=https://gist.githubusercontent.com/41323127/7941d72068ad0527dd3830b1384a87f7/raw/0fa02b3c133a0aef1b6ed18a8363ab401b5c619e/w16_exam2.py">程式</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import document, html
+import math
+  
+# 初始化 HTML，確保 canvas 元素存在
+def setup_canvas():
+    if not document.querySelector("#my_canvas"):
+        canvas = html.CANVAS(id="my_canvas", width=550, height=550)
+        document &lt;= canvas
+  
+setup_canvas()
+ 
+# Set up canvas
+canvas = document["my_canvas"]
+ctx = canvas.getContext("2d")  #由2D來進行繪圖
+ 
+# Set origin (31, 24)
+origin_x, origin_y = 31, 24  #設定原點座標為(31,24)
+ 
+# Label origin(標記原點)  
+ctx.font = "12px Arial"  #字體大小:12  字型:Arial
+ctx.fillStyle = "red"  # 字體顏色改為紅色
+ctx.fillText("(31, 24)", origin_x + 5, origin_y - -15)  # ctx.fillText用以描繪文字
+
+ctx.beginPath()  #啟用一個新的路徑
+ctx.moveTo(origin_x, origin_y)  #從原點(31,24)
+ctx.lineTo(200, origin_y)  
+ctx.moveTo(300, origin_y)  
+ctx.lineTo(500, origin_y)  
+ctx.moveTo(150, 100)  
+ctx.lineTo(400, 100) 
+ctx.moveTo(150, 300)  
+ctx.lineTo(400, 300) 
+ctx.moveTo(origin_x, 500)  #從原點(31,24)
+ctx.lineTo(200, 500)  
+ctx.moveTo(300, 500)  
+ctx.lineTo(500, 500) 
+ctx.moveTo(200, 400)  
+ctx.lineTo(300, 400)
+ctx.moveTo(origin_x, 200)  
+ctx.lineTo(200, 200)
+ctx.strokeStyle = "blue"
+ctx.lineWidth = 2
+ctx.stroke() 
+
+ctx.beginPath()  #啟用一個新的路徑
+ctx.moveTo(origin_x, origin_y)  
+ctx.lineTo(origin_x, 500)  
+ctx.moveTo(500, origin_y)  
+ctx.lineTo(500, 500) 
+ctx.moveTo(200, 100)  
+ctx.lineTo(200, 200) 
+ctx.moveTo(400, 100)  
+ctx.lineTo(400, 200) 
+ctx.moveTo(300, 200)  
+ctx.lineTo(300, 300) 
+ctx.moveTo(400, 300)  
+ctx.lineTo(400, 500) 
+ctx.moveTo(200, 400)  
+ctx.lineTo(200, 500) 
+ctx.moveTo(150, 300)  
+ctx.lineTo(150, 400)
+ctx.strokeStyle = "blue"
+ctx.lineWidth = 2
+ctx.stroke() </pre>
+<p></p><br />HW 3 Exam << <a href='HW 3 Exam.html'>Previous</a> <a href='HW 4.html'>Next</a> >> HW 4</div>
         
     <!-- footer -->
       <div class="container">
