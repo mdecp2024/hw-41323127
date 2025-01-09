@@ -270,6 +270,141 @@ for i in range(n): # 對於每一行
 </div>
 </div>
 <h3>w13</h3>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">&lt;!-- 導入 brython 程式庫 --&gt;
+&lt;p&gt;
+&lt;script src="/static/brython.js"&gt;&lt;/script&gt;
+&lt;script src="/static/brython_stdlib.js"&gt;&lt;/script&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;script&gt;// &lt;![CDATA[
+window.onload=function(){
+brython({debug:1, pythonpath:['/static/','./../downloads/py/']});
+}
+// ]]&gt;&lt;/script&gt;
+&lt;/p&gt;
+&lt;div id="brython_div1"&gt;&lt;/div&gt;
+&lt;script type="text/python3"&gt;// &lt;![CDATA[
+from browser import html
+from browser import document as doc
+ 
+# 創建畫布元素
+canvas = html.CANVAS(width=500, height=500)
+brython_div = doc["brython_div1"]
+brython_div &lt;= canvas
+ 
+# 定義圓心中心座標和半徑
+x1, y1 = 200, 200  # 第一個圓的中心座標
+x2, y2 = 300, 300  # 第二個圓的中心座標
+radius = 141.4  # 圓的半徑
+ 
+ctx = canvas.getContext("2d")
+ 
+# 繪製第一個圓 (黑色邊框)
+ctx.beginPath()
+ctx.arc(x1, y1, radius, 0, 2 * 3.14159)
+ctx.fillStyle = "orange"  # 圓的填充顏色
+ctx.fill()
+ctx.lineWidth = 2
+ctx.strokeStyle = "darkred"  # 圓的邊框顏色
+ctx.stroke()
+ 
+# 繪製第二個圓 (黑色邊框)
+ctx.beginPath()
+ctx.arc(x2, y2, radius, 0, 2 * 3.14159)
+ctx.fillStyle = "mediumaquamarine"  # 圓的填充顏色
+ctx.fill()
+ctx.lineWidth = 2
+ctx.strokeStyle = "darkgreen"  # 圓的邊框顏色
+ctx.stroke()
+ 
+# 填充第一個和第二個圓的交集區域
+ctx.save()
+ctx.beginPath()
+ctx.arc(x1, y1, radius, 0, 2 * 3.14159)
+ctx.clip()  # 剪裁到第一個圓
+ctx.beginPath()
+ctx.arc(x2, y2, radius, 0, 2 * 3.14159)
+ctx.fillStyle = "deepskyblue"  # 交集區域填充顏色
+ctx.fill()
+ctx.restore()
+
+# 1. 繪製第一個正方形 (紅色邊框，紫色填充)
+ctx.beginPath()
+ctx.rect(100, 100, 200, 200)
+ctx.fillStyle = "mediumpurple"  # 第一個正方形的填充顏色
+ctx.fill()
+ctx.lineWidth = 2
+ctx.strokeStyle = "crimson"  # 第一個正方形的邊框顏色
+ctx.stroke()
+
+# 2. 繪製第二個正方形 (紅色邊框，粉色填充)
+ctx.beginPath()
+ctx.rect(200, 200, 200, 200)
+ctx.fillStyle = "lightpink"  # 第二個正方形的填充顏色
+ctx.fill()
+ctx.strokeStyle = "firebrick"  # 第二個正方形的邊框顏色
+ctx.stroke()
+
+# 3. 繪製斜線 (藍色)
+ctx.beginPath()
+ctx.moveTo(100, 100)
+ctx.lineTo(300, 300)
+ctx.strokeStyle = "royalblue"
+ctx.lineWidth = 2
+ctx.stroke()
+
+# 4. 填充由方框和對角線劃分的區域
+
+# 繪製第一個方框內部的區域（藍色區域）
+ctx.fillStyle = "lightblue"
+ctx.beginPath()
+ctx.rect(100, 100, 200, 200)  # 第一個正方形
+ctx.fill()
+
+# 繪製第二個方框內部的區域（黃色區域）
+ctx.fillStyle = "yellow"
+ctx.beginPath()
+ctx.rect(200, 200, 200, 200)  # 第二個正方形
+ctx.fill()
+
+# 填充斜線劃分的區域
+ctx.fillStyle = "green"
+ctx.beginPath()
+ctx.moveTo(100, 100)  # 起點
+ctx.lineTo(300, 300)  # 斜線終點
+ctx.lineTo(300, 100)  # 矩形的右上角
+ctx.closePath()
+ctx.fill()
+
+# 確保保留所有邊界
+ctx.strokeStyle = "crimson"  # 保留第一個方框邊框
+ctx.beginPath()
+ctx.rect(100, 100, 200, 200)
+ctx.stroke()
+
+ctx.strokeStyle = "firebrick"  # 保留第二個方框邊框
+ctx.beginPath()
+ctx.rect(200, 200, 200, 200)
+ctx.stroke()
+
+ctx.strokeStyle = "royalblue"  # 保留藍色斜線
+ctx.beginPath()
+ctx.moveTo(100, 100)
+ctx.lineTo(300, 300)
+ctx.stroke()
+
+# 保留圓形邊框
+ctx.strokeStyle = "darkred"  # 保留第一個圓邊框
+ctx.beginPath()
+ctx.arc(x1, y1, radius, 0, 2 * 3.14159)
+ctx.stroke()
+
+ctx.strokeStyle = "darkgreen"  # 保留第二個圓邊框
+ctx.beginPath()
+ctx.arc(x2, y2, radius, 0, 2 * 3.14159)
+ctx.stroke()
+// ]]&gt;&lt;/script&gt;</pre>
+<p><br/><br/></p>
 <!-- 導入 brython 程式庫 -->
 <p>
 <script src="/static/brython.js"></script>
@@ -403,8 +538,7 @@ ctx.strokeStyle = "darkgreen"  # 保留第二個圓邊框
 ctx.beginPath()
 ctx.arc(x2, y2, radius, 0, 2 * 3.14159)
 ctx.stroke()
-</script>
-<h3>w15</h3>
+</script><h3>w15</h3>
 <p><a href="https://mdecp2024.github.io/hw-41323127/content/Brython.html?src=https://gist.githubusercontent.com/41323127/538ff31ec5ecfe251c2ad24bb5d58f9a/raw/302977d411668f4d75af96df254b159360955eee/wh_15hw.py">anchor</a></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 計算從 1 累加到 100 的總和
 total = sum(range(1, 101)) #總數 = 加範圍(1,101)
